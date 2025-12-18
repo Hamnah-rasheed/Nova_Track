@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "91375080233",
+    "project_id": "flora-5c96b",
+    "storage_bucket": "flora-5c96b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91375080233:android:43a67a982d5958041c1d38",
+        "android_client_info": {
+          "package_name": "com.example.novatrack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8QII8iPQrPN3f5y40EjeXr1i9_snKzzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91375080233:android:288ae2a0025dff241c1d38",
+        "android_client_info": {
+          "package_name": "com.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8QII8iPQrPN3f5y40EjeXr1i9_snKzzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
