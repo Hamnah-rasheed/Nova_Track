@@ -14,17 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.example.novatrack.utils.StatusBarHelper;
 import com.example.novatrack.utils.ValidationHelper;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;
+    private Button signInButton;
     private TextView signUpText, forgotPasswordText;
     private ImageView passwordToggle;
     private FirebaseAuth mAuth;
@@ -41,7 +40,7 @@ public class SignInActivity extends AppCompatActivity {
 
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
-        Button signInButton = findViewById(R.id.signInButton);
+        signInButton = findViewById(R.id.signInButton);
         signUpText = findViewById(R.id.signUpText);
         forgotPasswordText = findViewById(R.id.forgotPasswordText);
         passwordToggle = findViewById(R.id.passwordToggle);
@@ -68,38 +67,32 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void setupSignUpText() {
-        String fullText = getString(R.string.dont_have_account);
-        SpannableString spannableString = new SpannableString(fullText);
+        String text = "Don't have account? Sign Up";
+        SpannableString spannableString = new SpannableString(text);
 
-        String clickableText = "Sign Up";
-        int start = fullText.indexOf(clickableText);
-        int end = start + clickableText.length();
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+            }
 
-        if (start != -1) {
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-                }
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(getResources().getColor(R.color.primary_blue));
+                ds.setUnderlineText(false);
+            }
+        };
 
-                @Override
-                public void updateDrawState(@NonNull TextPaint ds) {
-                    ds.setColor(getResources().getColor(R.color.primary_blue));
-                    ds.setUnderlineText(false);
-                }
-            };
-
-            spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
+        spannableString.setSpan(clickableSpan, 20, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         signUpText.setText(spannableString);
         signUpText.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void setupForgotPasswordText() {
-        forgotPasswordText.setOnClickListener(v ->
-                startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class))
-        );
+        forgotPasswordText.setOnClickListener(v -> {
+            startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
+        });
     }
 
     private void signInUser() {
@@ -119,13 +112,11 @@ public class SignInActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Sign in successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, MainActivity.class));
+                        Toast.makeText(SignInActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignInActivity.this, ProjectDashboardActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this,
-                                "Authentication failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

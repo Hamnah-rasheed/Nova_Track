@@ -32,13 +32,22 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name="ForgotPasswordActivity"
+            android:name=".ForgotPasswordActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ProjectDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddProjectActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

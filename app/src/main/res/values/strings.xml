@@ -29,4 +29,26 @@
     <string name="toggle_password">Toggle Password Visibility</string>
     <string name="back">Back</string>
     <string name="welcome">Welcome!</string>
+
+    <string name="my_projects">My Projects</string>
+    <string name="search_projects">Search projects…</string>
+    <string name="add_project">Add Project</string>
+    <string name="no_projects_yet">No projects yet</string>
+    <string name="search">Search</string>
+
+    <string name="project_title">Project Title</string>
+    <string name="project_title_hint">Enter your project name</string>
+    <string name="short_description">Short Description</string>
+    <string name="short_description_hint">Enter short description about the project</string>
+    <string name="subject">Subject</string>
+    <string name="subject_hint">Enter subject name</string>
+    <string name="due_date">Due Date</string>
+    <string name="due_date_hint">No date selected yet</string>
+    <string name="select_date">Select Date</string>
+
+    <string name="what_novatrack_will_do">What NovaTrack will do:</string>
+    <string name="summarize_project">Summarize Your Project</string>
+    <string name="create_tasks">Create tasks and assign timeline</string>
+    <string name="recommend_resources">Recommend resources</string>
+    <string name="let_action_begin">Let the action begin</string>
 </resources>

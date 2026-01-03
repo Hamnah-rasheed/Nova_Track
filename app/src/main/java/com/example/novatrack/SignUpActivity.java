@@ -14,17 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.example.novatrack.utils.StatusBarHelper;
 import com.example.novatrack.utils.ValidationHelper;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText fullNameInput, emailInput, passwordInput, confirmPasswordInput;
+    private Button signUpButton;
     private TextView signInText;
     private ImageView passwordToggle, confirmPasswordToggle;
     private FirebaseAuth mAuth;
@@ -44,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
         confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
-        Button signUpButton = findViewById(R.id.signUpButton);
+        signUpButton = findViewById(R.id.signUpButton);
         signInText = findViewById(R.id.signInText);
         passwordToggle = findViewById(R.id.passwordToggle);
         confirmPasswordToggle = findViewById(R.id.confirmPasswordToggle);
@@ -82,30 +81,24 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void setupSignInText() {
-        String fullText = getString(R.string.already_have_account);
-        SpannableString spannableString = new SpannableString(fullText);
+        String text = "Already have account? Sign In";
+        SpannableString spannableString = new SpannableString(text);
 
-        String clickableText = "Sign In";
-        int start = fullText.indexOf(clickableText);
-        int end = start + clickableText.length();
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                finish();
+            }
 
-        if (start != -1) {
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    finish();
-                }
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(getResources().getColor(R.color.primary_blue));
+                ds.setUnderlineText(false);
+            }
+        };
 
-                @Override
-                public void updateDrawState(@NonNull TextPaint ds) {
-                    ds.setColor(getResources().getColor(R.color.primary_blue));
-                    ds.setUnderlineText(false);
-                }
-            };
-
-            spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
+        spannableString.setSpan(clickableSpan, 23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         signInText.setText(spannableString);
         signInText.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -139,13 +132,11 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, MainActivity.class));
+                        Toast.makeText(SignUpActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpActivity.this, ProjectDashboardActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this,
-                                "Registration failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
