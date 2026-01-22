@@ -45,6 +45,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.volley)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
