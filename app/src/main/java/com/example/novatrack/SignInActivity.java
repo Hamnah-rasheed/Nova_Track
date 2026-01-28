@@ -113,11 +113,18 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(SignInActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignInActivity.this, ProjectDashboardActivity.class));
+
+                        // Start HomeActivity
+                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                        startActivity(intent);
+
+                        // Optional: Close SignInActivity so user can't go back
                         finish();
                     } else {
-                        Toast.makeText(SignInActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Authentication failed: "
+                                + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 }
