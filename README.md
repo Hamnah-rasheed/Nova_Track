@@ -141,6 +141,7 @@ Please follow standard Java Android conventions and keep commits descriptive.
 
 - **Muhammad Awais** — [@MuhammadAwais053](https://github.com/MuhammadAwais053)
 - **Hamnah Rasheed** — [@Hamnah-rasheed](https://github.com/Hamnah-rasheed)
+- **Meerab Asim** - [@meerabztx](https://github.com/meerabztx)
 
 ---
 
